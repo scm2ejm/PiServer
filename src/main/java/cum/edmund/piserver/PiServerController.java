@@ -23,4 +23,19 @@ public class PiServerController {
         return new ResponseEntity(direction, HttpStatus.OK);
 
     }
+
+
+    @RequestMapping("/lightson")
+    public ResponseEntity<Direction> lightson() {
+        LightsDriver.getInstance().headlights(true);
+        return new ResponseEntity("lights on", HttpStatus.OK);
+
+    }
+
+    @RequestMapping("/lightsoff")
+    public ResponseEntity<Direction> lightsoff() {
+        LightsDriver.getInstance().headlights(false);
+        return new ResponseEntity("lights off", HttpStatus.OK);
+
+    }
 }

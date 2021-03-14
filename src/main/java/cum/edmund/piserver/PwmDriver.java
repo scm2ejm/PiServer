@@ -15,7 +15,6 @@ public class PwmDriver {
 
     private static final PwmDriver INSTANCE = new PwmDriver();
 
-    private final GpioPinDigitalOutput headlights;
     private final GpioPinPwmOutput pwm;
 
 
@@ -27,12 +26,8 @@ public class PwmDriver {
         Pin pin = CommandArgumentParser.getPin(RaspiPin.class, RaspiPin.GPIO_00);
         pwm = gpio.provisionSoftPwmOutputPin(pin);
         pwm.setPwmRange(100);
-
-        // Headlights are gpio pin #01. Provision as an output pin and turn on
-        headlights = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
-
+        
         // set shutdown state
-        headlights.setShutdownOptions(true, PinState.LOW);
         pwm.setShutdownOptions(true, PinState.LOW);
     }
 
